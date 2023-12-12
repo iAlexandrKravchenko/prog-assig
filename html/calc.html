@@ -1,0 +1,370 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="apple-touch-icon" href="icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <meta name="theme-color" content="#fafafa">
+
+
+    <style>
+
+        html {
+            box-sizing: border-box;
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            margin: 0;
+            background: linear-gradient(320deg, #808080, #A0A0A0, #808080);
+            font-family: 'Dosis', 'sans-serif';
+        }
+
+        .wrapper {
+            background-color: #cccccc;
+            display: flex;
+            flex-direction: column;
+            height: 560px;
+            width: 400px;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0);
+            border-radius: 10px;
+
+        }
+
+        .screen {
+            background: linear-gradient(320deg, #808080, #A0A0A0, #808080);
+            width: 280px;
+            height: 60px;
+            border-radius: 10px;
+            text-align: end;
+            padding-right: 15px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 30px rgba(35, 35, 35, 0.1);
+            font-size: 30px;
+            color: white;
+            padding-top: 8px;
+
+        }
+
+        .calc-button-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 5% 0;
+        }
+
+        .calc-buttons {
+            width: 280px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .calc-button {
+            background-color: rgba(255, 255,255);
+            height: 50px;
+            backdrop-filter: blur(5.5px);
+            -webkit-backdrop-filter: blur(5.5px);
+            border-radius: 14px;
+            box-shadow: 0 4px 30px rgba(35, 35, 35, 0.1);
+            flex-basis: 20%;
+            font-size: 24px;
+            border: 1px solid rgba(35, 35, 35, 0.3);
+        }
+        .calc-button:last-child{
+            backdrop-filter: blur(5.5px);
+            -webkit-backdrop-filter: blur(5.5px);
+            border-radius: 14px;
+            box-shadow: 0 4px 30px rgba(35, 35, 35, 0.1);
+            background: linear-gradient(320deg, #808080, #A0A0A0, #808080);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+        .calc-button:last-child:hover{
+            background: white;
+            color: inherit;
+            border: 1px solid rgba(35, 35, 35, 0.3);
+        }
+        .calc-button:hover{
+            background: linear-gradient(320deg, #e0e0e0, #f0f0f0, #e0e0e0);
+            color: #333;
+            transform: scale(1.05); /* Увеличение размера кнопки при наведении */
+            transition: background 0.3s, transform 0.3s; /* Плавные анимации для плавного эффекта */
+        }
+
+        .calc-button:active {
+            background: linear-gradient(320deg, #e0e0e0, #f0f0f0, #e0e0e0);
+            color: #333;
+            transform: scale(0.95); /* Уменьшение размера кнопки при активации (нажатии) */
+            transition: background 0.3s, transform 0.3s; /* Плавные анимации для плавного эффекта */
+        }
+
+        .double {
+            flex-basis: 47%;
+        }
+        .zero{
+            flex-basis: 73%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<!-- Add your site or application content here -->
+<div class="wrapper">
+    <section class="screen" id="screen">
+        0
+    </section>
+    <section class="calc-buttons">
+        <div class="calc-button-row">
+            <button class="calc-button double">
+                C
+            </button>
+            <button class="calc-button back" onclick="removeNumber()">
+                &larr;
+            </button>
+            <button class="calc-button division">
+                &divide;
+            </button>
+        </div>
+
+        <div class="calc-button-row">
+            <button class="calc-button seven" onclick="screenFunc('7')">
+                7
+            </button>
+            <button class="calc-button eight" onclick="screenFunc('8')">
+                8
+            </button>
+            <button class="calc-button nine" onclick="screenFunc('9')">
+                9
+            </button>
+            <button class="calc-button multiply">
+                &times;
+            </button>
+        </div>
+
+        <div class="calc-button-row">
+            <button class="calc-button four" onclick="screenFunc('4')">
+                4
+            </button>
+            <button class="calc-button five" onclick="screenFunc('5')">
+                5
+            </button>
+            <button class="calc-button six" onclick="screenFunc('6')">
+                6
+            </button>
+            <button class="calc-button minus">
+                &minus;
+            </button>
+        </div>
+
+        <div class="calc-button-row">
+            <button class="calc-button one" onclick="screenFunc('1')">
+                1
+            </button>
+            <button class="calc-button two" onclick=" screenFunc('2')">
+                2
+            </button>
+            <button class="calc-button three" onclick="screenFunc('3')">
+                3
+            </button>
+            <button class="calc-button plus">
+                &plus;
+            </button>
+        </div>
+
+        <div class="calc-button-row triple">
+            <button class="calc-button zero">
+                0
+            </button>
+            <button class="calc-button equals">
+                &equals;
+            </button>
+        </div>
+
+
+    </section>
+
+</div>
+
+
+<nav class="px-5 navbar fixed-bottom navbar-dark bg-dark">
+    <a href="index.html" class="navbar-brand"><i class="fas  fa-home"></i> </a>
+    <a href="tipscalculator.html" class="navbar-brand"><i class="fas fa-money-bill-alt"></i> </a>
+    <a href="dice.html" class="navbar-brand"><i class="fas  fa-dice"></i> </a>
+    <a href="calc.html" class="navbar-brand"><i class="fas  fa-calculator"></i> </a>
+</nav>
+
+
+<script>
+
+    var runningTotal = 0;
+    var buffer = "0";
+    var previousOperator;
+
+    var screen = document.querySelector('.screen');
+
+
+    function buttonClick(value) {
+        if (isNaN(value)) {
+            handleSymbol(value)
+        } else {
+            handleNumber(value);
+        }
+        screen.innerText = buffer;
+    }
+
+    function handleSymbol(symbol) {
+        switch (symbol) {
+            case 'C':
+                buffer = '0';
+                runningTotal = 0;
+                break;
+            case '=':
+                if (previousOperator === null) {
+                    return;
+                }
+                flushOperation(parseFloat(buffer));
+                previousOperator = null;
+                buffer = runningTotal;
+                runningTotal = 0;
+                break;
+            case '←':
+                if (buffer.length === 1) {
+                    buffer = '0';
+                } else {
+                    buffer = buffer.substring(0, buffer.length - 1);
+                }
+                break;
+            case '.':
+
+                break;
+            case '+':
+            case '−':
+            case '×':
+            case '÷':
+                handleMath(symbol);
+                break;
+        }
+    }
+
+    function handleMath(symbol) {
+        if (buffer === '0') {
+            return;
+        }
+
+        var intBuffer = parseFloat(buffer);
+
+        if (runningTotal === 0) {
+            runningTotal = intBuffer;
+        } else {
+            flushOperation(intBuffer);
+        }
+        previousOperator = symbol;
+        buffer = '0';
+
+    }
+
+    function flushOperation(intBuffer) {
+        if (previousOperator === '+') {
+            runningTotal += intBuffer;
+        } else if (previousOperator === '−') {
+            runningTotal -= intBuffer;
+        } else if (previousOperator === '×') {
+            runningTotal *= intBuffer;
+        } else if (previousOperator === '÷') {
+            runningTotal /= intBuffer;
+        }
+    }
+
+    function handleNumber(numberString) {
+        if (buffer === '0') {
+            buffer = numberString;
+        } else {
+            buffer += numberString;
+        }
+    }
+
+    function init() {
+        document.querySelector('.calc-buttons').addEventListener('click', function (event) {
+            buttonClick(event.target.innerText);
+        })
+    }
+
+    init();
+
+
+    // var x = "";
+    //
+    // function numbersFunc(value) {
+    //
+    //
+    // }
+    //
+    // function removeNumber() {
+    //     x = x.substring(0, x.length - 1);
+    //     // if (x.length === 1) {
+    //     //     x = "0";
+    //     // } else if (x.length > 1) {
+    //     //    x.substring(0, x.length - 1);
+    //     // }
+    // }
+    //
+    // function screenFunc(btnValue) {
+    //     x = x + btnValue;
+    //     if (x.length >= 1) {
+    //
+    //
+    //         document.getElementById("screen").innerHTML = x;
+    //     }
+    // }
+
+</script>
+
+
+<script src="js/vendor/modernizr-3.11.2.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+<script src="js/script.js"></script>
+
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<script>
+    window.ga = function () {
+        ga.q.push(arguments)
+    };
+    ga.q = [];
+    ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto');
+    ga('set', 'anonymizeIp', true);
+    ga('set', 'transport', 'beacon');
+    ga('send', 'pageview')
+</script>
+<script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>
+
+</html>
